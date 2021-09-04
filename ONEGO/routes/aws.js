@@ -22,7 +22,7 @@ const storage = multerS3({
     ContentType:'image/png',
     key: function(req,file,cb){
         // const ext = path.extname(file.origianalname);
-        cb(null, `${req.body.UID}_${Date.now()}_${file.originalname}`);
+        cb(null, `${req.body.UID}/${Date.now()}_${file.originalname}`);
     },
 });
 const upload = multer({
@@ -33,10 +33,13 @@ router.get('/', function(req, res, next) {
     res.send("aws라우터")
   });
 
-router.post('/test', upload.single('img'), (req,res)=>{
+
+router.post('/test', upload.single('img'), (req,res,next)=>{
     console.log(req.body.UID+','+req.body.img);
     let imgFile = req.file;
-    res.json(imgFile);
+    let UID = req.body.UID;
+    res.redirect(`../model/test/${UID}`);
 });
+
 
 module.exports = router;

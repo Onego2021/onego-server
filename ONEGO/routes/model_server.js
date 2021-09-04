@@ -7,12 +7,12 @@ router.get('/',(req,res)=>{
 })
 
 
-router.get('/test', function (req, res, next) {
-
+router.get('/test/:uid', function (req, res, next) {
+    let UID = req.params.uid
     const testAPI = (callback)=>{ 
         const options = {
-            method: 'POST',
-            uri: "http://127.0.0.1:5000/test",
+            method: 'GET',
+            uri: `http://127.0.0.1:5000/test?uid=${UID}`,
         }
 
         request(options, function (err, res, body) {
@@ -31,11 +31,11 @@ router.get('/test', function (req, res, next) {
                 status: "fail"
             });
         }
-        let json = JSON.stringify(result);
+        let stringData = JSON.stringify(result);
         res.send({
             message: "from flask",
             status: "success",
-            data: json    
+            data: stringData    
         });
     })
 
