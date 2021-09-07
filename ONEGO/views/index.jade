@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  form(action="/aws/test", method="post", enctype = "multipart/form-data")
+  form(action="/aws/upload_img", method="post", enctype = "multipart/form-data")
     div 
       input#username(type='text', name= "UID", placeholder='UID')
     div 
