@@ -6,6 +6,7 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const dotenv = require('dotenv');
 const {spawn} = require('child_process');
+const { text } = require('express');
 
 dotenv.config({path: __dirname + '\\' + '.env'});
 const router = express.Router();
@@ -53,8 +54,18 @@ router.get('/download_txt/:uid',(req,res,next)=>{
     const file = fs.createWriteStream('./utils/before_onego.txt');
     s3.getObject(params).createReadStream().pipe(file);
     
-    // spawn('python3',['C:/Users/judyi/Desktop/class/Kobot/ONEGO_project/onego_server/ONEGO/utils/sign_of_correction.py']);
-    res.send('python');
+    // var textdata;
+    // const output = spawn('python3',['./utils/sign_of_correction.py']);
+    // output.stdout.on('data', function (data) {
+    //     console.log('Pipe data from python script ...');
+    //     textdata = data.toString();
+    //     console.log(textdata);
+    //     res.wirte(data);
+    // });
+    // output.on('close',(code)=>{
+    //     console.log(`child process close all stdio with code ${code}`);
+    //     res.send(textdata)
+    // })
 })
 
 module.exports = router;
