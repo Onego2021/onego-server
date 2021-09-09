@@ -1,13 +1,14 @@
 from hanspell import spell_checker
 from hanspell.constants import CheckResult
 from hanspell.response import Checked
+import sys
 
-with open('./before_onego.txt', 'r', encoding='UTF-8') as f:
+with open('./utils/before_onego.txt', 'r', encoding='UTF-8') as f:
     lines = []
     for line in f:
         lines.append(line)
     
-    with open('./corrected.txt', 'a', encoding='UTF-8') as ff:
+    with open('./utils/after_onego.txt', 'w', encoding='UTF-8') as ff:
         sent_line = spell_checker.check(line)
         checked_line = sent_line.checked
         original_line = sent_line.original
@@ -15,8 +16,9 @@ with open('./before_onego.txt', 'r', encoding='UTF-8') as f:
         sent_line.words
         
         ff.write(checked_line)
+        print('done')
         
-    with open('./corrected_words.txt', 'a', encoding='UTF-8') as ff:
+    with open('./utils/corrected_words.txt', 'w', encoding='UTF-8') as ff:
         sent_line = spell_checker.check(line)
         checked_line = sent_line.checked
         original_line = sent_line.original
