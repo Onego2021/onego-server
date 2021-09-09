@@ -3,3 +3,11 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  form(action="/aws/upload_img", method="post", enctype = "multipart/form-data")
+    div 
+      input#username(type='text', name= "UID", placeholder='UID')
+    div 
+      input(type="file", name="img", id="reviewImageFileOpenInput", accept="image/png, image/jpe")
+    div 
+      button(type='submit') 제출
+ 
