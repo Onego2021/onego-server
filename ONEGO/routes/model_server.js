@@ -18,7 +18,7 @@ router.get('/test/:uid', function (req, res, next) {
     const testAPI = (callback)=>{ 
         const options = {
             method: 'GET',
-            uri: `http://127.0.0.1:5000/file_download?uid=${UID}`,
+            url: `http://3.38.9.213:5000/file_download?uid=${UID}`,
         }
 
         request(options, function (err, res, body) {
