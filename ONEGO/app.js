@@ -14,7 +14,6 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const modelRouter = require('./routes/model_server');
 const awsRouter = require('./routes/aws');
-const spellRouter = require('./routes/spell_check');
 
 var app = express();
 // view engine setup
@@ -31,7 +30,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/model',modelRouter);
 app.use('/aws',awsRouter);
-app.use('/spell',spellRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

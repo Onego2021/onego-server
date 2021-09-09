@@ -5,6 +5,7 @@ const fs = require('fs');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const dotenv = require('dotenv');
+const pythonShell = require('python-shell');
 const {spawn} = require('child_process');
 const { text } = require('express');
 
@@ -31,6 +32,7 @@ const upload = multer({
     storage: storage
 });
 
+
 router.get('/', function(req, res, next) {
     res.send("aws라우터")
   });
@@ -54,18 +56,19 @@ router.get('/download_txt/:uid',(req,res,next)=>{
     const file = fs.createWriteStream('./utils/before_onego.txt');
     s3.getObject(params).createReadStream().pipe(file);
     
-    // var textdata;
-    // const output = spawn('python3',['./utils/sign_of_correction.py']);
-    // output.stdout.on('data', function (data) {
-    //     console.log('Pipe data from python script ...');
-    //     textdata = data.toString();
-    //     console.log(textdata);
-    //     res.wirte(data);
-    // });
-    // output.on('close',(code)=>{
-    //     console.log(`child process close all stdio with code ${code}`);
-    //     res.send(textdata)
-    // })
+    var options = {
+        mode: 'text',
+        pythonOptions: ['-u'],
+    };
+    pythonShell.PythonShell.run('./utils/trans.py',options,(err,results) =>{
+        if(err){
+            throw err;
+        };
+
+        
+        console.log('finished -> '+ results);
+    });
+    return res.send('END'); 
 })
 
 module.exports = router;

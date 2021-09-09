@@ -22,6 +22,7 @@
     "mysql2": "^2.3.0",
     "nunjucks": "^3.2.3",
     "putty": "^1.0.1",
+    "python-shell": "^3.0.0",
     "request": "^2.88.2",
     "sequelize": "^6.6.5",
     "sequelize-cli": "^6.2.0"
@@ -31,6 +32,6 @@
   },
   "main": "app.js",
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": ""
 }
